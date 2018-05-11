@@ -11,6 +11,7 @@ gem 'bootstrap-sass', '3.3.7'
 gem 'execjs'
 gem 'therubyracer'
 gem 'rails-controller-testing'
+gem 'bcrypt',         '3.1.11'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
