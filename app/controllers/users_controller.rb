@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  def new         #render signup form
+  def new                             #render signup form
     @user = User.new
   end
 
@@ -12,9 +12,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      #succesfull
+      flash[:success] = 'Welcome to the Sample App!'
+      redirect_to @user              #eq is redirect_to user_url(@user)
     else
-      render 'new' #render view 'new.html.erb'
+      render 'new'                  #render view 'new.html.erb'
     end
   end
 
