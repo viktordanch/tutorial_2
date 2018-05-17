@@ -6,7 +6,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    #debugger
   end
 
   def create
@@ -15,7 +14,7 @@ class UsersController < ApplicationController
       flash[:success] = 'Welcome to the Sample App!'
       redirect_to @user              #eq is redirect_to user_url(@user)
     else
-      render 'new'                  #render view 'new.html.erb'
+      render 'new'                 #render view 'new.html.erb'
     end
   end
 
