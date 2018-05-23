@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
 
-  def new # render signup form
-    @user = User.new
+  def new
+    @user = User.new # render signup form
   end
 
   def show
