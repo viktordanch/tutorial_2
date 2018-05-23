@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:edit, :update]
+  before_action :correct_user,   only: [:edit, :update]
 
-  def new                             #render signup form
+  def new # render signup form
     @user = User.new
   end
 
@@ -13,9 +15,9 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = 'Welcome to the Sample App!'
-      redirect_to @user              #eq is redirect_to user_url(@user)
+      redirect_to @user # eq is redirect_to user_url(@user)
     else
-      render 'new'                  #render view 'new.html.erb'
+      render 'new' # render view 'new.html.erb'
     end
   end
 
@@ -35,8 +37,22 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
-    end
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
 
+  # Confirms a logged-in user.
+  def logged_in_user
+    unless logged_in?
+      store_location # puts URL in the session variable under the key :forwarding_url only for a GET request
+      flash[:danger] = 'Please log in.'
+      redirect_to login_url
+    end
+  end
+
+  # Confirms the correct user.
+  def correct_user
+    @user = User.find(params[:id]) # retrieved user on id from url
+    redirect_to(root_url) unless current_user?(@user)
+  end
 end
