@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all # pull all the users out of the database
+    @users = User.paginate(page: params[:page]) # pulls the users out of the database
   end
 
   def create
