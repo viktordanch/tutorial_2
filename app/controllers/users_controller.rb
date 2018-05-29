@@ -13,7 +13,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(page: params[:page]) # pulls the users out of the database
+    @users = User.where(activated: true).
+        paginate(page: params[:page]) # pulls the users out of the database
   end
 
   def create
