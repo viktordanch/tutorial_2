@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
         redirect_to root_url
       end
     else
+      # disappears as soon as there is an additional request
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
     end
