@@ -24,10 +24,14 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
   test 'profile display follow_form if logged in' do
     get user_path(@other_usr)
     assert_select 'div#follow_form', count: 0
+
     log_in_as(@user)
     get user_path(@other_usr)
     assert_select 'div#follow_form', count: 1
+    assert_select 'input[value="Follow"]'
     @user.follow(@other_usr)
     assert_select 'div#follow_form', count: 1
+    get user_path(@other_usr)
+    assert_select 'input[value="Unfollow"]'
   end
 end
