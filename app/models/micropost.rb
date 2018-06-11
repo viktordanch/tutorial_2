@@ -1,5 +1,5 @@
 class Micropost < ApplicationRecord
-  belongs_to :user
+  belongs_to :user # works because the microposts table has a user_id
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
